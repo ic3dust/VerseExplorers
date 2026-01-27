@@ -4,41 +4,43 @@ package src;
 import src.Vec3;
 import src.Vec2;
 
-//  IMPORT VARIABLES FOR CUBE POINT COORDS
+//  IMPORT IN-PROJECT DEPENDENCIES 
 import src.CubePointCoords;
+import src.WindowDesign;
 
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 // GRAPHICS
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.awt.event.MouseAdapter;
 import java.awt.Graphics;
 import java.awt.BasicStroke;
 
-// TIMER FOR ANIMATION
+// SWING
 import javax.swing.Timer;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 
-public class GamePanel extends JPanel implements Runnable {
+import java.awt.CardLayout;
+
+public class MenuPanel extends JPanel implements Runnable {
 
     // ------------- SCREEN SETTINGS -----------------
 
-    final int originalTileSize = 32; // 32x32 TILE
-    final int scale = 2;
-    final int tileSize = originalTileSize * scale; // 64x64 TILE
-
-    final int maxScreenCol = 10;
-    final int maxScreenRow = 10;
-    final int screenWidth = tileSize * maxScreenCol; // 1024 pixels X 1024 pixels PANEL
-    final int screenHeight = tileSize * maxScreenRow;
-    // final int compSize = 16;
+    final int screenWidth = WindowDesign.screenWidth;
+    final int screenHeight = WindowDesign.screenHeight;
+    // final int compSize = WindowDesign.compSize;
 
     // ------------- SCREEN SETTINGS -----------------
 
     // ------------- DESIGNAL ELEMENTS -----------------
 
-    final Color compColor = Color.GREEN;
-    final BasicStroke strokeWidth = new BasicStroke(1f);
+    final Color compColor = WindowDesign.compColor;
+    final Color darkBg = WindowDesign.darkBg;
+    final BasicStroke strokeWidth = WindowDesign.strokeWidth;
 
     // ------------- DESIGNAL ELEMENTS -----------------
 
@@ -97,13 +99,21 @@ public class GamePanel extends JPanel implements Runnable {
             { 0, 4 }, { 1, 5 }, { 2, 6 }, { 3, 7 } // INTERCONNECTIONS
     };
 
-    Thread gameThread;
+    Thread MenuThread;
 
-    // GAME PANEL CONSTRUCTOR
-    public GamePanel() {
+    CardLayout cl;
+    JPanel cards;
+
+    // MENU PANEL CONSTRUCTOR
+    public MenuPanel(JPanel cards) {
+
+        this.cards = cards;
+        this.cl = (CardLayout) cards.getLayout();
+
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-        this.setBackground(Color.black);
-        this.setDoubleBuffered(true); // TO IMPROVE GAME PERFORMANCE
+        this.setBackground(darkBg);
+        this.setDoubleBuffered(true); // TO IMPROVE MENU PERFORMANCE
+        this.setLayout(null);
 
         // FIRE A TIMER EVERY delay MILLISECONDS
         Timer timer = new Timer(delay, e -> {
@@ -120,6 +130,24 @@ public class GamePanel extends JPanel implements Runnable {
             // TO CYCLE
         });
         timer.start();
+
+        // RUN THIS AFTER AFTER THE PANEL IS LAID OUT
+        SwingUtilities.invokeLater(() -> {
+
+            Button start = new Button("Start", 0.5f, 0.33f, this);
+
+            Button settings = new Button("Settings", 0.5f, 0.66f, this);
+            settings.addActionListener(e -> cl.show(cards, "Settings"));
+
+            Button exit = new Button("Exit", 0.5f, 0.99f, this);
+
+            this.add(start);
+            this.add(settings);
+            this.add(exit);
+            // Button mute = new Button("Start", 0.5f, 0.33f, this);
+            // this.add(start);
+        });
+
     }
 
     /*
@@ -169,14 +197,14 @@ public class GamePanel extends JPanel implements Runnable {
 
     }
 
-    public void startGameThread() {
-        gameThread = new Thread(this); // GAME PANEL IS PASSED TO A THREAD CONSTRUCTOR
-        gameThread.start();
+    public void startMenuThread() {
+        MenuThread = new Thread(this); // MENU PANEL IS PASSED TO A THREAD CONSTRUCTOR
+        MenuThread.start();
     }
 
     @Override
     public void run() {
-        // GAME LOOP
+        // MENU LOOP
     }
 
 }
