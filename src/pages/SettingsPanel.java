@@ -1,12 +1,11 @@
-package src;
-
-// IN-PROJECT DEPENDENCIES
-import src.WindowDesign;
+package src.pages;
 
 // SWING
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import javax.swing.JButton;
+
+import src.utils.Button;
+import src.utils.WindowDesign;
 
 import java.awt.Dimension;
 import java.awt.Color;

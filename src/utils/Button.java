@@ -1,4 +1,4 @@
-package src;
+package src.utils;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;

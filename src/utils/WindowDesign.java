@@ -1,4 +1,4 @@
-package src;
+package src.utils;
 
 import java.awt.Color;
 import java.awt.BasicStroke;
@@ -7,9 +7,9 @@ public class WindowDesign {
 
     // ------------- DESIGNAL ELEMENTS -----------------
 
-    final static Color darkBg = Color.decode("#051511");
-    final static Color compColor = Color.decode("#30C7A9");
-    final static BasicStroke strokeWidth = new BasicStroke(1f);
+    public final static Color darkBg = Color.decode("#051511");
+    public final static Color compColor = Color.decode("#30C7A9");
+    public final static BasicStroke strokeWidth = new BasicStroke(1f);
 
     // ------------- DESIGNAL ELEMENTS -----------------
 
@@ -21,9 +21,9 @@ public class WindowDesign {
 
     final static int maxScreenCol = 10;
     final static int maxScreenRow = 10;
-    final static int screenWidth = tileSize * maxScreenCol; // 1024 pixels X 1024 pixels PANEL
-    final static int screenHeight = tileSize * maxScreenRow;
-    // final static int compSize = 16;
+    public final static int screenWidth = tileSize * maxScreenCol; // 1024 pixels X 1024 pixels PANEL
+    public final static int screenHeight = tileSize * maxScreenRow;
+    public final static int compSize = 4;
 
     // ------------- SCREEN SETTINGS -----------------
 }

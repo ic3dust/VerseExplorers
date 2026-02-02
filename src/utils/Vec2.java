@@ -1,4 +1,4 @@
-package src;
+package src.utils;
 
 public class Vec2 {
     public float x, y;

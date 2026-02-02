@@ -5,6 +5,9 @@ import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import src.pages.*;
+import src.utils.*;
+
 public class Main {
     public static void main(String[] args) {
 
